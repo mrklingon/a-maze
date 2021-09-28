@@ -8,6 +8,20 @@ function showUNI (xx: number, yy: number) {
         }
     }
 }
+input.onButtonPressed(Button.A, function () {
+    x += 1
+    if (x > 10) {
+        x = 0
+    }
+    showUNI(x, y)
+})
+input.onButtonPressed(Button.B, function () {
+    y += 1
+    if (y > 10) {
+        y = 0
+    }
+    showUNI(x, y)
+})
 function getY (spot: number) {
     return Math.trunc(spot / Diameter)
 }
@@ -19,15 +33,18 @@ function getX (spot: number) {
 }
 let Universe: number[] = []
 let Diameter = 0
-let x = 0
 let y = 0
+let x = 0
+x = 0
+y = 0
 let mode = 0
 Diameter = 100
 let Unisize = Diameter * Diameter
 Universe = [0]
 for (let index = 0; index < Unisize; index++) {
-    Universe.push(0)
+    Universe.push(randint(100, 254))
 }
+showUNI(x, y)
 basic.forever(function () {
 	
 })
