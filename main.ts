@@ -90,6 +90,14 @@ for (let index = 0; index < Unisize; index++) {
     Universe.push(0)
 }
 showUNI(x, y)
+loops.everyInterval(500, function () {
+    for (let index = 0; index < 4; index++) {
+        let Sav = 0
+        led.plotBrightness(0, 0, 255)
+        basic.pause(100)
+        led.plotBrightness(0, 0, Sav)
+    }
+})
 basic.forever(function () {
 	
 })
