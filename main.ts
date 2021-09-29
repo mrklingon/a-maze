@@ -49,21 +49,42 @@ function mkMaze () {
     y = 0
     my = 0
     mx = 0
+    yy = 0
+    xx = 0
     while (mx != Diam && my != Diam) {
-        mx += randint(-1, 1)
-        my += randint(-1, 1)
-        if (mx < 0) {
-            mx = 0
+        xx += randint(-1, 1)
+        yy += randint(-1, 1)
+        odist = distGoal(mx, my)
+        if (xx < 0) {
+            xx = 0
         }
-        if (my < 0) {
-            my = 0
+        if (yy < 0) {
+            yy = 0
         }
-        if (mx > Diam) {
-            mx = Diam
+        if (xx > Diam) {
+            xx = Diam
         }
-        if (my > Diam) {
-            my = Diam
+        if (yy > Diam) {
+            yy = Diam
         }
+        while (odist <= distGoal(xx, yy)) {
+            xx += randint(-1, 1)
+            yy += randint(-1, 1)
+            if (xx < 0) {
+                xx = 0
+            }
+            if (yy < 0) {
+                yy = 0
+            }
+            if (xx > Diam) {
+                xx = Diam
+            }
+            if (yy > Diam) {
+                yy = Diam
+            }
+        }
+        mx = xx
+        my = yy
         setPix(mx, my, 0)
     }
 }
@@ -76,6 +97,10 @@ function getSPOT (xx: number, yy: number) {
 function getX (spot: number) {
     return spot % Diameter
 }
+let Sav = 0
+let odist = 0
+let xx = 0
+let yy = 0
 let mx = 0
 let my = 0
 let Diam = 0
@@ -86,8 +111,7 @@ let y = 0
 let x = 0
 x = 0
 y = 0
-let mode = 0
-Diameter = 0 + 0
+Diameter = 100
 Unisize = Diameter * Diameter
 Universe = [0]
 Diam = Diameter - 1
@@ -96,8 +120,8 @@ for (let index = 0; index < Unisize; index++) {
 }
 showUNI(x, y)
 loops.everyInterval(500, function () {
+    Sav = led.pointBrightness(0, 0)
     for (let index = 0; index < 4; index++) {
-        let Sav = 0
         led.plotBrightness(0, 0, 255)
         basic.pause(100)
         led.plotBrightness(0, 0, Sav)
